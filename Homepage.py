@@ -12,7 +12,7 @@ import sys
 
 from gui import MainMenuWidget, LoginWidget
 from connection import AccountManager
-
+from Login_form import AdvancedLoginForm
 class HomePage(QWidget):
     def __init__(self):
         super().__init__()
@@ -21,21 +21,19 @@ class HomePage(QWidget):
 
         self.login_button = QPushButton("Login")
         self.login_button.setStyleSheet("background-color: #4CAF50; color: white")
-        self.login_button.clicked.connect(self.show_account_management)
-
+        self.login_button.clicked.connect(self.show_login_form)
+        self.hide()
         layout = QVBoxLayout()
         layout.addWidget(QLabel("<h1>Welcome to Banking System</h1>"))
         layout.addWidget(self.login_button)
 
         self.setLayout(layout)
 
-    def show_account_management(self):
-        self.hide()
-        server = r"DESKTOP-K8BIO91\SQLEXPRESS"
-        database = "BankSystem"
-        # account_manager = AccountManager(server, database)
-        self.MainMenuWidget = MainMenuWidget()
-        self.MainMenuWidget.show()
+        self.login_form = AdvancedLoginForm()
+        self.login_form.setWindowTitle("Login")
+    
+       def show_login_form(self):
+        self.login_form.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
